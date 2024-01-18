@@ -5,6 +5,7 @@
     --c-accent-100:rgb(243, 246, 251);
     --c-primary-600:rgb(232, 217, 197);
     --c-primary-500:rgb(245, 238, 229);    
+    --c-primary-400:rgb(255, 252, 247);       
     --c-neutral-800:rgb(22, 28, 39);
     --c-neutral-100:rgb(255, 255, 255);
 
@@ -12,7 +13,7 @@
     --bg-accent-100:rgb(243, 246, 251);
     --bg-primary-600:rgb(232, 217, 197);
     --bg-primary-500:rgb(245, 238, 229);    
-    --bg-primary-400:rgb(248, 245, 241);    
+    --bg-primary-400:rgb(255, 252, 247);   
     --bg-neutral-800:rgb(22, 28, 39);
     --bg-neutral-100:rgb(255, 255, 255);
     --bg-card-price:rgba(0, 0, 0, 0.356);
@@ -50,6 +51,9 @@
     --fs-secondary-heading:var(--fs-700);
     --fs-btn:var(--fs-400);
     --fs-footer-nav-text:var(--fs-500);
+
+    /* Uniform values */
+    --border-radius:10px;
     
 
 }
@@ -120,8 +124,13 @@ picture {
 /* 3.UTILITY CLASSES */
 
 /* 3.1 Heading Font Size*/
+.fs-primary-heading,
+.fs-secondary-heading{
+    line-height: 1.1;
+}
 .fs-primary-heading{
     font-size: var(--fs-primary-heading);
+    
 }
 
 .fs-secondary-heading{
@@ -183,7 +192,7 @@ picture {
 
 /* 3.6 Container*/
 .container{
-    --min-width:55em;
+    --min-width:62em;
 
 width:min(var(--min-width),80%);
 margin-inline: auto;
@@ -205,6 +214,290 @@ margin-inline: auto;
 }
 
 
+/* 4. GENERAL STYLES */
+body{
+    font-family: var(--ff-body);
+}
+
+.logo{
+    font-family:var(--ff-logo);
+}
+
+.hero-section,
+.product-section{
+    min-height: 100svh;
+}
+
+/* links */
+
+.logo-link,
+.primary-nav-link,
+.hero-explore-link,
+.footer-link{
+position:relative;
+text-decoration: none;
+cursor: pointer;
+color:inherit;
+
+}
+
+
+.primary-nav-link::after,
+.hero-explore-link::after,
+.footer-link::after{
+content: ' ';
+position: absolute;
+left:0;
+bottom: -15%;
+width:100%;
+
+background-color: currentColor;
+
+transform:scaleX(0);
+transform-origin:right;
+transition: transform 210ms ease-in;
+
+}
+.primary-nav-link::after,
+.hero-explore-link::after{
+    height: 2px;
+}
+
+.footer-link::after{
+    height: 1.5px;
+}
+.primary-nav-link:hover::after,
+.hero-explore-link:hover::after,
+.footer-link:hover::after{
+
+    transform:scaleX(1);
+    transform-origin:left;
+
+}
+
+.hero-explore-link{
+    width:fit-content;
+    text-align: center;
+}
+
+.full-bleed{    
+    clip-path: inset(0 -100vmax);
+}
+
+.btn{
+    padding:0.5em 1.2em;
+    border:none;
+    border-radius:var(--border-radius);
+    cursor: pointer;
+    
+}
+/* 5. Hero section */
+.hero-section{
+    background-image:linear-gradient(90deg, #992a0e 52%,#f0dec6 40%);
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    isolation: isolate;
+    inset:0;
+}
+
+.hero-section::before{
+    content:'';
+    position:absolute;
+    z-index:-2;
+    background-image:url('../img/hero-image-1.jpg');
+    width: 40%;
+    height: 100%;
+
+}
+
+.hero-section::after{
+    content:'';
+    position:absolute;
+    z-index:-1;
+    background-image: linear-gradient( 
+    90deg, 
+    rgba(0, 0, 0, 0.76)40%,   
+ rgba(212, 141, 71, 0.575)40%
+    );
+    width:100%;
+    height:100%;
+    top:0%;   
+}
+.header{
+    justify-content: space-around;
+    align-items: center;
+    padding-top: 1.7rem;
+}
+
+.header-logo{
+    font-size: 1.9rem;
+    margin-inline-start: 2rem;
+}
+
+.header-primary-nav-list{ 
+    justify-content: space-around;
+    gap:4.2rem;
+    margin-inline-end: 6.5rem;
+}
+
+.header-primary-nav-item .inverse-link{
+    color:var(--c-neutral-800);
+}
+
+.cart{
+    margin-inline-end:10rem;
+}
+
+.hero-text-wrapper{    
+    margin-top: 25vh;
+    letter-spacing: 0.035rem;
+    width:ch;
+}
+.hero-text{
+justify-content: center;
+text-align: center;
+align-items: center;
+gap:4rem;
+}
+
+
+/* MAIN */
+/* Product 1 */
+
+
+.product-sections-title{    
+    padding-top: 2rem;
+    text-align: center;
+}
+.product-section1{
+box-shadow: 0 0 0 100vmax var(--bg-primary-500);
+}
+/* Product 2*/
+.product-section2{
+box-shadow: 0 0 0 100vmax var(--bg-primary-400);
+}
+/* Product 3*/
+.product-section3{
+box-shadow: 0 0 0 100vmax var(--bg-accent-100);
+}
+.product-section-secondary-heading{
+    text-align: center;
+    padding-block:2rem;
+}
+.product-wrapper{
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: space-between;    
+    gap:2rem;
+    height: min-content;
+}
+
+/* product card */
+.card{
+    --min-width:18.5em;
+    position: relative;
+    padding: 2em 1em 2.5em; 
+    width:var(--min-width);
+    height:90%;        
+    background:var(--bg-primary-400);
+    border-radius: var(--border-radius);
+    box-shadow: 0 5px 5px -6px var(--bg-neutral-800);
+}
+.product-price{
+    position:absolute;
+    top:48.5%;
+    left:13%;
+    padding:0.1em 0.2em;
+    background: var(--bg-card-price);
+    color: var(--c-neutral-100);
+}
+.product-img,
+.product-details{
+    width:90%;
+    margin-inline: auto;
+}
+.product-img{ 
+    object-fit: contain;   
+    height:55%;   
+    margin-block-end: 1rem;
+}
 
 
 
+.card-btn{
+    margin-block-start: 1rem;
+    background:var(--bg-neutral-800);
+    color:var(--c-neutral-100);
+    box-shadow: 0 5px 5px -6px var(--bg-neutral-800);
+    position:relative;
+}
+
+.card-btn::after{
+content:'';
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background: rgba(255, 255, 255, 0.288);
+
+transition: transform 250ms ease-in;
+transform:scale(0);
+
+}
+
+.card-btn:hover::after{
+    transform:scale(1);
+    transform-origin:top left; 
+}
+
+.footer{
+padding:6em 2em 5rem; 
+grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+gap:3rem;
+grid-template-areas:
+"footer-logo   footer-logo   trade-assurance    source             know-us"
+"footer-logo   footer-logo   support            sell-on-beisafi    know-us"
+"...           social-links  social-links       social-links       know-us";
+}
+
+.trade-assurance{
+    grid-area:trade-assurance;
+}
+.source{
+    grid-area:source;
+}
+.know-us{
+    grid-area:know-us;
+}
+.footer-logo{
+    grid-area: footer-logo; 
+    align-self: center;   
+    text-align: center;    
+    
+}
+.support{
+    grid-area:support;
+}
+
+.sell-on-beisafi{
+    grid-area:sell-on-beisafi;
+}
+.social-links{
+    grid-area:social-links;    
+}
+
+.footer-social-links-list{
+    justify-content: space-between; 
+    width: 50%;
+    margin-top:2rem;
+    margin-inline: auto;      
+}
+
+.footer-links-title{
+    margin-block-end:0.3rem;
+}
+
+.footer-text-links-list{
+    gap:0.2rem;
+}

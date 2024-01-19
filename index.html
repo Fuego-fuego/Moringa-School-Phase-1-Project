@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- JS link -->
     <script src="./src/main.js" defer></script>
+    
     <!-- Style Sheets link -->
     <link rel="stylesheet" href="./css/style.css">
     <!-- Google Fonts -->
@@ -25,7 +26,7 @@
         <!-- Header -->
         <header class="header | text-neutral-100 flex">
             <!-- Logo -->
-            <logo class="header-logo | logo capitalize"><a href="#home" class="logo-link">bei safi stores</a></logo>
+            <logo class="header-logo | logo capitalize fw-semi-bold"><a href="#home" class="logo-link">bei safi stores</a></logo>
             <!-- Navigation -->
             <nav class="header-primary-nav " aria-label="header navigation">
                 <ul class="header-primary-nav-list | flex uppercase" role="list">
@@ -39,18 +40,53 @@
                 </ul>
             </nav>
             <!-- Cart icon -->
-            <img src="./img/cart_shopping_icon.svg" alt="shopping cart" class="cart ">
+            <div id="cartWrapper" class="shopping-cart-wrapper">
+                <img src="./img/cart_shopping_icon.svg" alt="shopping cart">
+                <span class="cart-quantity">0</span>
+            </div>
         </header>
+
         <div class="container | hero-text-wrapper">
             <!-- hero text -->
             <div class="hero-text | text-neutral-100 flex-column">
-                <p class="fs-primary-heading  capitalize fw-bold">a world of quality products & unbeatable prices</p>
+                <p class="fs-primary-heading  capitalize fw-bold">a world of jewelry cloths & unbeatable prices</p>
                 <p class="hero-text-p2 fs-secondary-heading  capitalize fw-bold"> your next favorite finds await</p>
                 <a href="#products-section" class="hero-explore-link | uppercase  fw-bold">explore <span
                         class="explore-arrow">&#10230;</span></a>
             </div>
         </div>
     </div>
+    <div class="cart-overlay">
+        <aside id = 'cart' class="cart hide-cart bg-primary-500">
+            <button id="cart-close-btn" class="cart-close-btn"><img src="./img/icon-close.svg" alt="X icon,for closing the cart"></button>
+            <header class="cart-header">
+                <h2 class="cart-title |fw-bold capitalize">cart</h2>
+            </header>
+            <!-- cart items -->
+            <ul id="cartItems" class="cart-items" role="list">
+                <!-- SAMPLE CART ITEM -->
+                <!-- <li class="cart-item flex">
+                    <img src="./img/hero-image-1.jpg" alt="cart item image" class="cart-item-img">
+                    <div class="cart-item-details flex-column">
+                        <p class="cart-item-name |fw-bold"></p>
+                        <p class="total-price | fs-tertiary-heading fw-semi-bold capitalize"> items price : 200ksh</p>
+                        <div class="cart-item-number-wrapper">
+                            <span class="cart-item-add | cart-item-number-btn"> + </span>
+                            <span class="cart-item-number"> 1 </span>
+                            <span class="cart-item-subtract | cart-item-number-btn"> - </span>
+                        </div>
+                    </div>
+                </li> -->
+            </ul>
+            <!-- footer -->
+            <footer class=" cart-footer | flex-column">
+                <p class="cart-total-p | fw-semi-bold fs-tertiary-heading capitalize">
+                    total : <span id="cartTotal">0</span>.ksh
+                </p>
+                <button id ='cartItemsClearAllBtn' class="cart-btn | card-btn btn uppercase">clear cart</button>
+            </footer>
+        </aside>
+        </div>
     <!-- MAIN -->
     <main id="products-section" class="product-section">
         <!-- Product Section 1 -->
@@ -61,7 +97,7 @@
                 <section class="product-section1 | product-section ">
                     <h2 class="fs-secondary-heading product-section-secondary-heading fw-bold capitalize">men's Vogue</h2>
                     <!-- products added from JavaScript  -->
-                    <ul class="product-wrapper grid" id="product-wrapper1">
+                    <ul class="product-wrapper grid" id="product-wrapper1" role="list">
                         
                     </ul>
                 </section>
@@ -72,7 +108,7 @@
             <section class="product-section2 | product-section full-bleed bg-primary-400">
                 <h2 class="fs-secondary-heading product-section-secondary-heading fw-bold capitalize">women's Vogue</h2>
                 <!-- products added from JavaScript  -->
-                <ul class="product-wrapper grid" id="product-wrapper2">
+                <ul class="product-wrapper grid" id="product-wrapper2" role="list">
 
                 </ul>
             </section>
@@ -82,7 +118,7 @@
             <section class="product-section3 | product-section full-bleed bg-accent-100">
                 <h2 class="fs-secondary-heading product-section-secondary-heading fw-bold capitalize">jewelry</h2>
                 <!-- products added from JavaScript  -->
-                <ul class="product-wrapper grid" id="product-wrapper3">
+                <ul class="product-wrapper grid" id="product-wrapper3" role="list">
 
                 </ul>
             </section>
@@ -91,7 +127,7 @@
     <!-- FOOTER -->
     <footer id="footer" class="footer | grid bg-neutral-800 text-neutral-100">
         <!-- Logo -->
-        <logo class="footer-logo | logo fs-primary-heading"><a class="logo-link" href="#home">Bei Safi Stores</a></logo>
+        <logo class="footer-logo | logo fs-primary-heading fw-semi-bold"><a class="logo-link" href="#home">Bei Safi Stores</a></logo>
         <!-- Trade assurance links -->
         <nav class="trade-assurance" arial-label="Trade Assurance Links">
             <h3 class="footer-links-title | fs-tertiary-heading fw-bold capitalize">trade assurance</h3>

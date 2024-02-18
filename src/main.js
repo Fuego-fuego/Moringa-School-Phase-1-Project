@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', event => {
     womenClothing();
     jewelry();
     localServerRender();
-    
+
 
 
     /* Make Cart visible */
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', event => {
         cart.classList.add('hide-cart');
     });
 
-    
+
 
 
 
@@ -176,35 +176,51 @@ function jewelryRenderer(jewel) {
 
 }
 // Initial render
-function initialRender(){
-localServerRender();
-} 
+function initialRender() {
+    localServerRender();
+}
 /* Render Item to cart  */
 function renderToCart(productObj) {
     const cartItem = document.createElement('li');
     cartItem.classList = 'cart-item flex';
     cartItem.innerHTML = `
- <img src="${productObj.image}" alt="cart item image" class="cart-item-img">
- <div class="cart-item-details flex-column">
-     <p class="cart-item-name |fw-bold">${productObj.name}</p>
-     <p class="total-price | fs-tertiary-heading fw-semi-bold capitalize"> items price : ${productObj.price * productObj.count}ksh</p>
-     <div class="cart-item-number-wrapper">
-         <span id="cartIncrementBtn" class="cart-item-add | cart-item-number-btn"> + </span>
-         <span id='cartItemCount'class="cart-item-number">${productObj.count} </span>
-         <span id = 'cartItemSubtractBtn' class="cart-item-subtract | cart-item-number-btn"> - </span>
-     </div>
- </div>
- `;
+    <img src="${productObj.image}" alt="cart item image" class="cart-item-img">
+    <div class="cart-item-details flex-column">
+        <p class="cart-item-name |fw-bold">${productObj.name}</p>
+        <p class="total-price | fs-tertiary-heading fw-semi-bold capitalize"> items price : ${productObj.price * productObj.count}ksh</p>
+        <div class="cart-item-number-wrapper">
+            <span id="cartIncrementBtn" class="cart-item-add | cart-item-number-btn"> + </span>
+            <span id='cartItemCount'class="cart-item-number">${productObj.count} </span>
+            <span id = 'cartItemSubtractBtn' class="cart-item-subtract | cart-item-number-btn"> - </span>
+        </div>
+    </div>`;
 
-// Delete btn 
 
-const cartItemSubtractBtn = cartItem.querySelector('#cartItemSubtractBtn');
+    // Get card item count parent element 
 
-cartItemSubtractBtn.addEventListener('click', () =>{
-    cartItem.remove()
-    deleteProductFromCart(cartItem.id);
-    
-});
+    const cartItemCount = cartItem.querySelector('#cartItemCount');
+
+    // Subtract btn 
+
+    const cartItemSubtractBtn = cartItem.querySelector('#cartItemSubtractBtn');
+
+    cartItemSubtractBtn.addEventListener('click', () => {
+
+        if (productObj.count <= 1) {
+            // Update DOM
+            cartItem.remove()        
+            // Update server
+            deleteProductFromCart((productObj.id));
+        } else {
+            // Update json server
+            updateProduct(productObj);
+            productObj.count--;
+            // update DOM
+            cartItemCount.textContent = productObj.count;
+        }
+
+
+    });
 
 
 
@@ -265,7 +281,7 @@ function updateProduct(productObj) {
         header: {
             'Content-type': 'application/json'
         },
-        body: JSON.stringify(animalObj)
+        body: JSON.stringify(productObj)
     })
 
 }
@@ -284,7 +300,7 @@ function deleteProductFromCart(id) {
 
 // Delete all
 // Delete all f(x)
-function deleteAll(){
+function deleteAll() {
     fetch(`http://localhost:3000/cart`)
         .then(res => res.json())
         .then(products => products.forEach(product => deleteProductFromCart(product.id)));
@@ -295,7 +311,7 @@ function deleteAll(){
 
 const cartItemsClearAllBtn = document.querySelector('#cartItemsClearAllBtn');
 
-cartItemsClearAllBtn.addEventListener('click',() =>{
+cartItemsClearAllBtn.addEventListener('click', () => {
 
     const cartList = document.querySelector('#cartItems');
     cartList.innerHTML = '';
@@ -311,7 +327,7 @@ cartItemsClearAllBtn.addEventListener('click',() =>{
 // cartIncrementBtn.addEventListener('click', () =>{    
 
 //     productObj.count += 1;   
-    
+
 // })
 
 // updateProduct(productObj);
